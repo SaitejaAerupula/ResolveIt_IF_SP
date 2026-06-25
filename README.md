@@ -77,8 +77,27 @@ graph TD
 
 ### 3️⃣ Frontend (VS Code)
 - Open the `frontend/` folder in **VS Code**.
+- Copy `frontend/.env.example` to `frontend/.env` and set `VITE_API_URL` if needed.
 - Run `npm install` and then `npm run dev`.
 - Visit `http://localhost:5173`.
+
+---
+
+## 🌐 Deploy Online
+
+### Frontend (Vercel)
+1. Import [github.com/SaitejaAerupula/ResolveIt_IF_SP](https://github.com/SaitejaAerupula/ResolveIt_IF_SP) on [Vercel](https://vercel.com).
+2. Set environment variable: `VITE_API_URL` = your backend URL (e.g. `https://resolveit-backend.onrender.com`).
+3. Deploy — Vercel uses the included `vercel.json`.
+
+### Backend (Render)
+1. Create a [Render](https://render.com) account and connect your GitHub repo.
+2. Use the included `render.yaml` or create a **Web Service** from `backend/Dockerfile`.
+3. Add a MySQL database (Render, PlanetScale, or Railway) and set:
+   - `SPRING_DATASOURCE_URL` — JDBC URL (e.g. `jdbc:mysql://host:3306/complaint_db`)
+   - `SPRING_DATASOURCE_USERNAME`
+   - `SPRING_DATASOURCE_PASSWORD`
+4. Deploy the backend, then point the frontend `VITE_API_URL` to the live backend URL.
 
 ---
 

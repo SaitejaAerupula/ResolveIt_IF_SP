@@ -6,6 +6,7 @@ import './index.css';
 // ----------------------
 // GLOBAL STATE
 // ----------------------
+const API_BASE = import.meta.env.VITE_API_URL || '${API_BASE}';
 const AuthContext = createContext();
 
 // ----------------------
@@ -167,7 +168,7 @@ function LoginPage() {
         }
 
         // Send POST to /signup
-        const resp = await fetch('http://localhost:8080/api/auth/signup', {
+        const resp = await fetch(`${API_BASE}/api/auth/signup`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password, role, name: email.split('@')[0] })
@@ -179,7 +180,7 @@ function LoginPage() {
         }
       } else {
         // Send POST to /login
-        const resp = await fetch('http://localhost:8080/api/auth/login', {
+        const resp = await fetch(`${API_BASE}/api/auth/login`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ email, password })
@@ -356,7 +357,7 @@ function SubmitComplaintPage() {
     };
 
     try {
-      const response = await fetch('http://localhost:8080/api/complaints', {
+      const response = await fetch(`${API_BASE}/api/complaints`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newComplaint)
@@ -448,7 +449,7 @@ function MyComplaintsPage() {
     const fetchComplaints = async () => {
       let allData = [];
       try {
-        const resp = await fetch('http://localhost:8080/api/complaints');
+        const resp = await fetch(`${API_BASE}/api/complaints`);
         if (resp.ok) {
           allData = await resp.json();
         }
@@ -507,7 +508,7 @@ function AdminDashboardPage() {
   const fetchData = async () => {
     let apiData = [];
     try {
-      const res = await fetch('http://localhost:8080/api/complaints');
+      const res = await fetch(`${API_BASE}/api/complaints`);
       if (res.ok) apiData = await res.json();
     } catch(err) {}
     
@@ -520,7 +521,7 @@ function AdminDashboardPage() {
 
   const handleUpdateStatus = async (id, newStatus) => {
     try {
-      const resp = await fetch(`http://localhost:8080/api/complaints/${id}`, {
+      const resp = await fetch(`${API_BASE}/api/complaints/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus })
